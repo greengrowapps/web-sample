@@ -1,0 +1,15 @@
+entity Product{
+	Name String
+}
+
+entity Item{
+	Quantity Double
+}
+
+relationship OneToMany{
+	Product{Item} to Item{Product(Name)}
+}
+
+dto * with mapstruct
+
+service all with serviceImpl
