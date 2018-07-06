@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "firebaseToken"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "token",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastUpdate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20180706060720",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "firebase_token",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

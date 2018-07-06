@@ -1,0 +1,64 @@
+<div>
+    <h2>
+        <span jhiTranslate="shoppinglistApp.firebaseToken.home.title">Firebase Tokens</span>
+        <button class="btn btn-primary float-right jh-create-entity create-firebase-token" [routerLink]="['/', { outlets: { popup: ['firebase-token-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="shoppinglistApp.firebaseToken.home.createLabel">
+            Create new Firebase Token
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="firebaseTokens">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="shoppinglistApp.firebaseToken.token">Token</span></th>
+            <th><span jhiTranslate="shoppinglistApp.firebaseToken.lastUpdate">Last Update</span></th>
+            <th><span jhiTranslate="shoppinglistApp.firebaseToken.user">User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let firebaseToken of firebaseTokens ;trackBy: trackId">
+                <td><a [routerLink]="['../firebase-token', firebaseToken.id ]">{{firebaseToken.id}}</a></td>
+                <td>{{firebaseToken.token}}</td>
+                <td>{{firebaseToken.lastUpdate | date:'medium'}}</td>
+                <td>
+                    {{firebaseToken.userLogin}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../firebase-token', firebaseToken.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'firebase-token/'+ firebaseToken.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'firebase-token/'+ firebaseToken.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -9,6 +9,7 @@
                 "main": "Entitäten",
                 "product": "Product",
                 "item": "Item",
+                "firebaseToken": "Firebase Token",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

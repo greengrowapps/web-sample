@@ -42,6 +42,7 @@ public class CacheConfiguration {
             cm.createCache(com.greengrowapps.shoppinglist.domain.Product.class.getName(), jcacheConfiguration);
             cm.createCache(com.greengrowapps.shoppinglist.domain.Product.class.getName() + ".items", jcacheConfiguration);
             cm.createCache(com.greengrowapps.shoppinglist.domain.Item.class.getName(), jcacheConfiguration);
+            cm.createCache(com.greengrowapps.shoppinglist.domain.FirebaseToken.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

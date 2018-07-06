@@ -1,0 +1,24 @@
+
+{
+    "shoppinglistApp": {
+        "firebaseToken" : {
+            "home": {
+                "title": "Firebase Tokens",
+                "createLabel": "Create a new Firebase Token",
+                "createOrEditLabel": "Create or edit a Firebase Token"
+            },
+            "created": "A new Firebase Token is created with identifier {{ param }}",
+            "updated": "A Firebase Token is updated with identifier {{ param }}",
+            "deleted": "A Firebase Token is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Firebase Token {{ id }}?"
+            },
+            "detail": {
+                "title": "Firebase Token"
+            },
+            "token": "Token",
+            "lastUpdate": "Last Update",
+            "user": "User"
+        }
+    }
+}
