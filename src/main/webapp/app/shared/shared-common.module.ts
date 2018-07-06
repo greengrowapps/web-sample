@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { registerLocaleData } from '@angular/common';
 import locale from '@angular/common/locales/en';
 
+import { WindowRef } from './tracker/window.service';
 import {
     ShoppinglistSharedLibsModule,
     JhiLanguageHelper,
@@ -22,6 +23,7 @@ import {
     ],
     providers: [
         JhiLanguageHelper,
+        WindowRef,
         Title,
         {
             provide: LOCALE_ID,

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { ShoppinglistTestModule } from '../../../test.module';
 import { Principal, AccountService } from '../../../../../../main/webapp/app/shared';
 import { SettingsComponent } from '../../../../../../main/webapp/app/account/settings/settings.component';
+import { JhiTrackerService } from '../../../../../../main/webapp/app/shared/tracker/tracker.service';
+import { MockTrackerService } from '../../../helpers/mock-tracker.service';
 
 describe('Component Tests', () => {
 
@@ -19,6 +21,10 @@ describe('Component Tests', () => {
                 imports: [ShoppinglistTestModule],
                 declarations: [SettingsComponent],
                 providers: [
+                    {
+                        provide: JhiTrackerService,
+                        useClass: MockTrackerService
+                    },
                 ]
             })
             .overrideTemplate(SettingsComponent, '')

@@ -1,8 +1,6 @@
 package com.greengrowapps.shoppinglist.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.greengrowapps.shoppinglist.domain.User;
-import com.greengrowapps.shoppinglist.security.UserSecurityUtils;
 import com.greengrowapps.shoppinglist.service.FirebaseTokenService;
 import com.greengrowapps.shoppinglist.web.rest.errors.BadRequestAlertException;
 import com.greengrowapps.shoppinglist.web.rest.util.HeaderUtil;
@@ -31,11 +29,9 @@ public class FirebaseTokenResource {
     private static final String ENTITY_NAME = "firebaseToken";
 
     private final FirebaseTokenService firebaseTokenService;
-    private UserSecurityUtils userSecurityUtils;
 
-    public FirebaseTokenResource(FirebaseTokenService firebaseTokenService, UserSecurityUtils userSecurityUtils) {
+    public FirebaseTokenResource(FirebaseTokenService firebaseTokenService) {
         this.firebaseTokenService = firebaseTokenService;
-        this.userSecurityUtils = userSecurityUtils;
     }
 
     /**
@@ -51,9 +47,6 @@ public class FirebaseTokenResource {
         log.debug("REST request to save FirebaseToken : {}", firebaseTokenDTO);
         if (firebaseTokenDTO.getId() != null) {
             throw new BadRequestAlertException("A new firebaseToken cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        if (firebaseTokenDTO.getUserId() != null) {
-            throw new BadRequestAlertException("A new firebaseToken cannot already have an User ID", ENTITY_NAME, "useridexists");
         }
         FirebaseTokenDTO result = firebaseTokenService.save(firebaseTokenDTO);
         return ResponseEntity.created(new URI("/api/firebase-tokens/" + result.getId()))
@@ -77,12 +70,6 @@ public class FirebaseTokenResource {
         if (firebaseTokenDTO.getId() == null) {
             return createFirebaseToken(firebaseTokenDTO);
         }
-
-        User user = userSecurityUtils.GetCurrentUserOrThrowUnauthorized();
-
-        firebaseTokenDTO.setUserId(user.getId());
-
-
         FirebaseTokenDTO result = firebaseTokenService.save(firebaseTokenDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, firebaseTokenDTO.getId().toString()))
