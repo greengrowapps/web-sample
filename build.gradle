@@ -219,6 +219,7 @@ dependencies {
     }
     compile "com.google.api-client:google-api-client:1.23.0"
     compile "com.facebook.business.sdk:facebook-java-business-sdk:3.0.0"
+    compile "com.greengrowapps:ggarest-java:0.0.2"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 

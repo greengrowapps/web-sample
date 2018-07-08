@@ -1,7 +1,9 @@
 package com.greengrowapps.shoppinglist.service;
 
 import com.greengrowapps.shoppinglist.domain.FirebaseToken;
+import com.greengrowapps.shoppinglist.domain.User;
 import com.greengrowapps.shoppinglist.repository.FirebaseTokenRepository;
+import com.greengrowapps.shoppinglist.repository.UserRepository;
 import com.greengrowapps.shoppinglist.service.dto.FirebaseTokenDTO;
 import com.greengrowapps.shoppinglist.service.mapper.FirebaseTokenMapper;
 import org.slf4j.Logger;
@@ -25,10 +27,12 @@ public class FirebaseTokenService {
     private final FirebaseTokenRepository firebaseTokenRepository;
 
     private final FirebaseTokenMapper firebaseTokenMapper;
+    private UserRepository userRepository;
 
-    public FirebaseTokenService(FirebaseTokenRepository firebaseTokenRepository, FirebaseTokenMapper firebaseTokenMapper) {
+    public FirebaseTokenService(FirebaseTokenRepository firebaseTokenRepository, FirebaseTokenMapper firebaseTokenMapper, UserRepository userRepository) {
         this.firebaseTokenRepository = firebaseTokenRepository;
         this.firebaseTokenMapper = firebaseTokenMapper;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -41,6 +45,7 @@ public class FirebaseTokenService {
         log.debug("Request to save FirebaseToken : {}", firebaseTokenDTO);
         FirebaseToken firebaseToken = firebaseTokenMapper.toEntity(firebaseTokenDTO);
         firebaseToken = firebaseTokenRepository.save(firebaseToken);
+
         return firebaseTokenMapper.toDto(firebaseToken);
     }
 
@@ -53,6 +58,17 @@ public class FirebaseTokenService {
     public List<FirebaseTokenDTO> findAll() {
         log.debug("Request to get all FirebaseTokens");
         return firebaseTokenRepository.findAll().stream()
+            .map(firebaseTokenMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Transactional(readOnly = true)
+    public List<FirebaseTokenDTO> findAllForUser(long userId) {
+        log.debug("Request to get all FirebaseTokens for user: {}",userId);
+
+        User user = userRepository.findOne(userId);
+
+        return firebaseTokenRepository.findAllByUser(user).stream()
             .map(firebaseTokenMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }

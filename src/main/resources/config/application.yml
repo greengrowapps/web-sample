@@ -65,6 +65,8 @@ spring:
             client-secret: xxx
 
         # jhipster-needle-add-social-configuration
+    firebase:
+        serverkey: xxx
 security:
     basic:
         enabled: false
